@@ -48,6 +48,13 @@ public abstract class Vehicle
 
     }
 
+    /// <summary>
+    /// Establishes the vehicle's wheel count.
+    /// <remarks>
+    /// Default value is 4 wheels. In case of setting a different default value or range of values,
+    /// override this function.
+    /// </remarks>
+    /// </summary>
     public virtual void AssignWheelCount()
     {
         WheelCount = 4;
