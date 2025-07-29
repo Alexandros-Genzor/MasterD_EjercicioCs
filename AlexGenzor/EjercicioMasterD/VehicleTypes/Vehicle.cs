@@ -10,7 +10,7 @@ public abstract class Vehicle
     #region PROPERTIES
     public string Model { get; set; }
     public float HorsePower { get; set; }
-    public string PlateNumber { get; set; }
+    public string PlateNumber { get; private set; }
     public int WheelCount { get; set; }
     public EngineTypes EngineType { get; set; }
     public string GearShiftType { get; set; }
@@ -18,12 +18,15 @@ public abstract class Vehicle
     
     #endregion
     
+    
     #region METHODS & FUNCTIONS
 
-    public virtual void AssignModel(string model)
+    public virtual void AssignModel()
     {
         Console.Write("Introduce el modelo del vehículo: ");
-        Model = Console.ReadLine();
+        this.Model = Console.ReadLine();
+        
+        Console.WriteLine();
         
     }
 
@@ -37,7 +40,7 @@ public abstract class Vehicle
             Console.Write("¿Cuàntos caballos de potencia tiene el vehículo?: ");
             if (float.TryParse(Console.ReadLine(), out value))
             {
-                HorsePower = value;
+                this.HorsePower = value;
                 isValid = true;
                 
             }
@@ -45,41 +48,82 @@ public abstract class Vehicle
                 Console.WriteLine("Valor introducido no válido. ");
             
         }
+        
+        Console.WriteLine();
 
     }
 
-    /// <summary>
-    /// Establishes the vehicle's wheel count.
-    /// <remarks>
-    /// Default value is 4 wheels. In case of setting a different default value or range of values,
-    /// override this function.
-    /// </remarks>
-    /// </summary>
+    // Default actions for car. Override for other vehicles.
     public virtual void AssignWheelCount()
     {
         WheelCount = 4;
         
     }
-    
-    public abstract void AssignEngineType();
+
+    // Default actions for car. Override for other vehicles.
+    public virtual void AssignEngineType()
+    {
+        bool isValid;
+
+        do
+        {
+            Console.Write("¿Es un vehículo de (1) Gasolina, (2) Diesel, (3) Híbrido o (4) Eléctrico?: ");
+            isValid = true;
+
+            switch (Console.ReadLine().ToLower())
+            {
+                case "1":
+                case "gasolina":
+                    EngineType = EngineTypes.Petrol;
+
+                    break;
+                
+                case "2":
+                case "diesel":
+                    EngineType = EngineTypes.Diesel;
+                    
+                    break;
+                
+                case "3":
+                case "hbrido":
+                    EngineType = EngineTypes.Hybrid;
+                    
+                    break;
+                
+                case "4":
+                case "electrico":
+                    EngineType = EngineTypes.Electric;
+                    
+                    break;
+                
+                default:
+                    Console.WriteLine("La opción seleccionada no es válida. ");
+                    isValid = false;
+                    
+                    break;
+                
+            }
+
+        } while (!isValid);
+        
+        Console.WriteLine();
+        
+    }
 
     public virtual void AssignShifterType()
     {
         NoValidShifter:
         
         Console.Write("¿El vehículo tiene un cambio de marchas (1) Automático o (2) Manual?: ");
-        switch (Console.ReadLine())
+        switch (Console.ReadLine().ToLower())
         {
-            case "Automatico":
             case "automatico":
-            case "Auto":
             case "auto":
             case "1":
                 GearShiftType = "Automatico";
 
                 break;
             
-            case "Manual":
             case "manual":
             case "2":
                 GearShiftType = "Manual";
@@ -92,6 +136,8 @@ public abstract class Vehicle
             
         }
         
+        Console.WriteLine();
+        
     }
 
     public virtual void AssignTractionType()
@@ -100,23 +146,20 @@ public abstract class Vehicle
         
         Console.Write("¿El vehículo es de (1) tracción delantera, (2) tracción trasera o (3) tracción total / 4x4?: ");
 
-        switch (Console.ReadLine())
+        switch (Console.ReadLine().ToLower())
         {
-            case "Delantera":
             case "delantera":
             case "1":
                 TractionType = TractionTypes.FrontWheels;
 
                 break;
             
-            case "Trasera":
             case "trasera":
             case "2":
                 TractionType = TractionTypes.RearWheels;
 
                 break;
             
-            case "Total":
             case "total":
             case "3":
                 TractionType = TractionTypes.AllWheels;
@@ -129,8 +172,28 @@ public abstract class Vehicle
             
         }
         
+        Console.WriteLine();
+        
     }
     
+    public virtual void AssignPlateNumber()
+    {
+        Random rand = new Random();
+        
+        PlateNumber+=rand.Next(0, 10000).ToString() + " ";
+        
+        for (int i = 0; i < 3; i++) 
+        {
+            // range in rand.Next() represents the range of values within the ascii table that 
+            // corresponds to all capitalised letters of the alphabet.
+            PlateNumber+=(char)rand.Next(65, 91);
+
+        }
+        
+        Console.WriteLine($"Matrícula del vehículo: {PlateNumber}\n");
+        
+    }
+
     public override string ToString()
     {
         return $"Model: {Model} - {PlateNumber}, {WheelCount} wheels, traction on {TractionType}" +
