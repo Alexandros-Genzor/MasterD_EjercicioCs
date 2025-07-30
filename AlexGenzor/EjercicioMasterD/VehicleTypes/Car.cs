@@ -38,9 +38,9 @@ public class Car : Vehicle
         AssignTractionType();
         
         AssignDoorCount();
-        AssignIsSpecialVehicle();
-        AssignAreWindowsTinted();
-        AssignIsPublicTransportCar();
+        SetIsSpecialVehicle();
+        SetTintedWindows();
+        SetIsPublicTransportCar();
         
 
     }
@@ -75,28 +75,38 @@ public class Car : Vehicle
         
     }
 
-    private void AssignIsSpecialVehicle()
+    private void SetIsSpecialVehicle()
     {
         IsSpecialVehicle = MyUtils.DecipherAnswer("¿Es un vehículo especial?");
 
     }
 
-    private void AssignAreWindowsTinted()
+    private void SetTintedWindows()
     {
         AreWindowsTinted = MyUtils.DecipherAnswer("¿Tiene las lunas traseras tintadas?");
 
     }
 
-    private void AssignIsPublicTransportCar()
+    private void SetIsPublicTransportCar()
     {
         IsPublicTransportCar = MyUtils.DecipherAnswer("¿Es un vehículo de servicio público?");
 
     }
 
+    #region OVERRIDEABLES
     public override string ToString()
     {
-        return base.ToString();
+        return $"Modelo: {Model} - {PlateNumber}, {DoorCount} puertas con lunas traseras " +
+               $"{(AreWindowsTinted ? "tintadas" : "sin tintar")}. Tipo de motor: {EngineType} " +
+               $"de {HorsePower} Caballos. {WheelCount} ruedas, tracción {TractionType}. " +
+               $"Vehículo especial: {(IsSpecialVehicle ? "si" : "no")}. " +
+               $"Vehículo de transporte público: {(IsPublicTransportCar ? "si" : "no")}. ";
         
+        // return $"Modelo: {Model} - {PlateNumber}, {WheelCount} ruedas, tracción {TractionType}" +
+        //        $"Tipo de motor: {EngineType}, {HorsePower} Caballos. Cambio de marchas: {GearShiftType}";
+
     }
+    
+    #endregion
     
 }

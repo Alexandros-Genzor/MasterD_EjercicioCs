@@ -13,8 +13,24 @@ public abstract class Vehicle
     public string PlateNumber { get; private set; }
     public int WheelCount { get; set; }
     public EngineTypes EngineType { get; set; }
+    // dictionary made to show a more readable value to each enum element
+    /*public Dictionary<EngineTypes, string> EngineTypeDict { get; } = new Dictionary<EngineTypes, string>()
+    {
+        { EngineTypes.Petrol, "Gasolina"},
+        { EngineTypes.Diesel, "Diesel"},
+        { EngineTypes.Hybrid, "Híbrido"},
+        { EngineTypes.Electric, "Eléctrico"}
+    };*/
+
     public string GearShiftType { get; set; }
     public TractionTypes TractionType { get; set; }
+    // dictionary made to show a more readable value to each enum element
+    /*public Dictionary<TractionTypes, string> TractionTypeDict { get; } = new Dictionary<TractionTypes, string>()
+    {
+        { TractionTypes.FrontWheels, "Tracción delantera"}, 
+        { TractionTypes.RearWheels, "Tracción trasera"}, 
+        { TractionTypes.AllWheels, "Tracción total"}
+    };*/
     
     #endregion
     
@@ -196,8 +212,8 @@ public abstract class Vehicle
 
     public override string ToString()
     {
-        return $"Model: {Model} - {PlateNumber}, {WheelCount} wheels, traction on {TractionType}" +
-               $"Engine type: {EngineType}, {HorsePower} HP. Gear shift type: {GearShiftType}";
+        return $"Modelo: {Model} - {PlateNumber}, {WheelCount} ruedas, tracción {TractionType}" +
+               $"Tipo de motor: {EngineType}, {HorsePower} Caballos. Cambio de marchas: {GearShiftType}";
         
     }
 
