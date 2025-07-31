@@ -94,6 +94,47 @@ public class Car : Vehicle
     }
 
     #region OVERRIDEABLES
+
+    public override void AssignTractionType()
+    {
+        NoValidTraction:
+        
+        Console.Write("¿El vehículo es de (1) tracción Delantera, (2) tracción Trasera o (3) tracción Total / 4x4?: ");
+
+        switch (Console.ReadLine().ToLower())
+        {
+            case "traccion delantera":
+            case "delantera":
+            case "1":
+                TractionType = TractionTypes.FrontWheels;
+
+                break;
+            
+            case "traccion trasera":
+            case "trasera":
+            case "2":
+                TractionType = TractionTypes.RearWheels;
+
+                break;
+            
+            case "traccion total":
+            case "total":
+            case "4x4":
+            case "3":
+                TractionType = TractionTypes.AllWheels;
+                
+                break;
+            
+            default:
+                Console.WriteLine("Tracción del vehículo introducida no válida. ");
+                goto NoValidTraction;
+            
+        }
+        
+        Console.WriteLine();
+        
+    }
+
     public override string ToString()
     {
         return $"Modelo: {Model} - {PlateNumber}, {DoorCount} puertas con lunas traseras " +

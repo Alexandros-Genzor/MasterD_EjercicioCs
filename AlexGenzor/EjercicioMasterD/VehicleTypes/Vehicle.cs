@@ -158,38 +158,8 @@ public abstract class Vehicle
 
     public virtual void AssignTractionType()
     {
-        NoValidTraction:
-        
-        Console.Write("¿El vehículo es de (1) tracción delantera, (2) tracción trasera o (3) tracción total / 4x4?: ");
+        TractionType = TractionTypes.RearWheels;
 
-        switch (Console.ReadLine().ToLower())
-        {
-            case "delantera":
-            case "1":
-                TractionType = TractionTypes.FrontWheels;
-
-                break;
-            
-            case "trasera":
-            case "2":
-                TractionType = TractionTypes.RearWheels;
-
-                break;
-            
-            case "total":
-            case "3":
-                TractionType = TractionTypes.AllWheels;
-                
-                break;
-            
-            default:
-                Console.WriteLine("Tracción del vehículo introducida no válida. ");
-                goto NoValidTraction;
-            
-        }
-        
-        Console.WriteLine();
-        
     }
     
     public virtual void AssignPlateNumber()
