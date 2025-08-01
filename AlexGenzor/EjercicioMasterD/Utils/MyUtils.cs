@@ -1,4 +1,4 @@
-﻿namespace AlexGenzor.EjercicioMasterD.Other;
+﻿namespace AlexGenzor.EjercicioMasterD.Utils;
 
 public class MyUtils
 {
@@ -16,6 +16,7 @@ public class MyUtils
         switch (Console.ReadLine().ToLower()) 
         {
             case "y":
+            case "s":
             case "yes":
             case "si":
                 return true;

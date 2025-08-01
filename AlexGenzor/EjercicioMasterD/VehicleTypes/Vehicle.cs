@@ -10,7 +10,7 @@ public abstract class Vehicle
     #region PROPERTIES
     public string Model { get; set; }
     public float HorsePower { get; set; }
-    public string PlateNumber { get; private set; }
+    public string PlateNumber { get; protected set; }
     public int WheelCount { get; set; }
     public EngineTypes EngineType { get; set; }
     // dictionary made to show a more readable value to each enum element
@@ -162,22 +162,26 @@ public abstract class Vehicle
 
     }
     
-    public virtual void AssignPlateNumber()
+    public virtual string AssignPlateNumber()
     {
         Random rand = new Random();
         
-        PlateNumber+=rand.Next(0, 10000).ToString() + " ";
+        string plateNumber = "";
+        
+        plateNumber+=rand.Next(0, 10000).ToString() + " ";
         
         for (int i = 0; i < 3; i++) 
         {
             // range in rand.Next() represents the range of values within the ascii table that 
             // corresponds to all capitalised letters of the alphabet.
-            PlateNumber+=(char)rand.Next(65, 91);
+            plateNumber+=(char)rand.Next(65, 91);
 
         }
         
-        Console.WriteLine($"Matrícula del vehículo: {PlateNumber}\n");
-        
+        Console.WriteLine($"Matrícula del vehículo: {plateNumber}\n");
+
+        return plateNumber;
+
     }
 
     public override string ToString()

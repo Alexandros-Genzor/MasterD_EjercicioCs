@@ -1,4 +1,4 @@
-﻿using AlexGenzor.EjercicioMasterD.Other;
+﻿using AlexGenzor.EjercicioMasterD.Utils;
 
 namespace AlexGenzor.EjercicioMasterD.VehicleTypes;
 
@@ -31,7 +31,7 @@ public class Car : Vehicle
 
         AssignModel();
         AssignHp();
-        AssignPlateNumber();
+        base.PlateNumber = AssignPlateNumber();
         AssignWheelCount();
         AssignEngineType();
         AssignShifterType();
@@ -78,18 +78,21 @@ public class Car : Vehicle
     private void SetIsSpecialVehicle()
     {
         IsSpecialVehicle = MyUtils.DecipherAnswer("¿Es un vehículo especial?");
+        Console.WriteLine();
 
     }
 
     private void SetTintedWindows()
     {
         AreWindowsTinted = MyUtils.DecipherAnswer("¿Tiene las lunas traseras tintadas?");
+        Console.WriteLine();
 
     }
 
     private void SetIsPublicTransportCar()
     {
         IsPublicTransportCar = MyUtils.DecipherAnswer("¿Es un vehículo de servicio público?");
+        Console.WriteLine();
 
     }
 
@@ -137,9 +140,10 @@ public class Car : Vehicle
 
     public override string ToString()
     {
-        return $"Modelo: {Model} - {PlateNumber}, {DoorCount} puertas con lunas traseras " +
+        return $"Coche modelo: {Model} - {PlateNumber}, {DoorCount} puertas con lunas traseras " +
                $"{(AreWindowsTinted ? "tintadas" : "sin tintar")}. Tipo de motor: {EngineType} " +
-               $"de {HorsePower} Caballos. {WheelCount} ruedas, tracción {TractionType}. " +
+               $"de {HorsePower} Caballos con cambio de marchas {GearShiftType}. " +
+               $"{WheelCount} ruedas, tracción {TractionType}. " +
                $"Vehículo especial: {(IsSpecialVehicle ? "si" : "no")}. " +
                $"Vehículo de transporte público: {(IsPublicTransportCar ? "si" : "no")}. ";
         

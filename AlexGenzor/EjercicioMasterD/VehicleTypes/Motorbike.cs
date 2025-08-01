@@ -1,4 +1,4 @@
-﻿using AlexGenzor.EjercicioMasterD.Other;
+﻿using AlexGenzor.EjercicioMasterD.Utils;
 
 namespace AlexGenzor.EjercicioMasterD.VehicleTypes;
 
@@ -14,10 +14,11 @@ public class Motorbike : Vehicle
     {
         AssignModel();
         AssignHp();
-        AssignPlateNumber();
+        base.PlateNumber = AssignPlateNumber();
         AssignWheelCount();
         AssignEngineType();
         AssignShifterType();
+        AssignTractionType();
         
         AssignSidecar();
         
@@ -67,7 +68,7 @@ public class Motorbike : Vehicle
     {
         NoValidEngineType:
         
-        Console.Write("¿Es una motocicleta de (1) Gasolina o (2) Eléctrica?: ");
+        Console.Write("¿La motocicleta es de (1) Gasolina o (2) Eléctrica?: ");
 
         switch (Console.ReadLine().ToLower())
         {
@@ -96,7 +97,14 @@ public class Motorbike : Vehicle
 
     public override string ToString()
     {
-        return $"";
+        // return $"";
+        
+        /*return $"Modelo: {Model} - {PlateNumber}, {WheelCount} ruedas, tracción {TractionType}" +
+               $"Tipo de motor: {EngineType}, {HorsePower} Caballos. Cambio de marchas: {GearShiftType}";*/
+        
+        return $"Motocicleta modelo: {Model} - {PlateNumber}. Tipo de motor: {EngineType} " +
+               $"de {HorsePower} Caballos con cambio de marchas {GearShiftType}. " +
+               $"{WheelCount} ruedas {(HasSidecar ? "con" : "sin")} sidecar, tracción {TractionType}. ";
 
     }
 
