@@ -140,7 +140,7 @@ public class Car : Vehicle
 
     public override string ToString()
     {
-        return $"Coche modelo: {Model} - {PlateNumber}, {DoorCount} puertas con lunas traseras " +
+        return $"{PlateNumber} - Coche modelo: {Model}, {DoorCount} puertas con lunas traseras " +
                $"{(AreWindowsTinted ? "tintadas" : "sin tintar")}. Tipo de motor: {EngineType} " +
                $"de {HorsePower} Caballos con cambio de marchas {GearShiftType}. " +
                $"{WheelCount} ruedas, tracción {TractionType}. " +

@@ -10,7 +10,8 @@ public class Program
     public static void Main(string[] args)
     {
         Vehicle vehicle = new Truck();
-        Console.WriteLine(vehicle.ToString());
+        Console.WriteLine(vehicle.GetType().Name);
+        
 
     }
     

@@ -186,7 +186,7 @@ public abstract class Vehicle
 
     public override string ToString()
     {
-        return $"Modelo: {Model} - {PlateNumber}, {WheelCount} ruedas, tracción {TractionType}" +
+        return $"{PlateNumber} - Modelo: {Model}, {WheelCount} ruedas, tracción {TractionType}" +
                $"Tipo de motor: {EngineType}, {HorsePower} Caballos. Cambio de marchas: {GearShiftType}";
         
     }

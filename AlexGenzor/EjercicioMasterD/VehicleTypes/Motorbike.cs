@@ -102,7 +102,7 @@ public class Motorbike : Vehicle
         /*return $"Modelo: {Model} - {PlateNumber}, {WheelCount} ruedas, tracción {TractionType}" +
                $"Tipo de motor: {EngineType}, {HorsePower} Caballos. Cambio de marchas: {GearShiftType}";*/
         
-        return $"Motocicleta modelo: {Model} - {PlateNumber}. Tipo de motor: {EngineType} " +
+        return $"{PlateNumber} - Motocicleta modelo: {Model}. Tipo de motor: {EngineType} " +
                $"de {HorsePower} Caballos con cambio de marchas {GearShiftType}. " +
                $"{WheelCount} ruedas {(HasSidecar ? "con" : "sin")} sidecar, tracción {TractionType}. ";
 
