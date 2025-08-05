@@ -9,10 +9,11 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Vehicle vehicle = new Truck();
-        Console.WriteLine(vehicle.GetType().Name);
+        // Vehicle vehicle = new Truck();
+        // Console.WriteLine(vehicle.GetType().Name);
         
-
+        CLIManager cli = new CLIManager();
+        
     }
     
 }

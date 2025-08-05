@@ -168,7 +168,7 @@ public abstract class Vehicle
         
         string plateNumber = "";
         
-        plateNumber+=rand.Next(0, 10000).ToString() + " ";
+        plateNumber+=rand.Next(0, 10000).ToString("0000") + " ";
         
         for (int i = 0; i < 3; i++) 
         {

@@ -29,6 +29,9 @@ public class Car : Vehicle
         // this.AreWindowsTinted = false;
         // this.IsPublicTransportCar = false;
 
+        Console.WriteLine("Configurador de coches:\n");
+
+        
         AssignModel();
         AssignHp();
         base.PlateNumber = AssignPlateNumber();

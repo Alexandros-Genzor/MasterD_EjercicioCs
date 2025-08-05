@@ -12,6 +12,9 @@ public class Motorbike : Vehicle
     #region CONSTRUCTOR
     public Motorbike()
     {
+        Console.WriteLine("Configurador de motos:\n");
+
+        
         AssignModel();
         AssignHp();
         base.PlateNumber = AssignPlateNumber();

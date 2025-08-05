@@ -35,6 +35,8 @@ public class Truck : Vehicle
 
     public Truck()
     {
+        Console.WriteLine("Configurador de camiones:\n");
+            
         AssignModel();
         AssignHp();
         base.PlateNumber = AssignPlateNumber();

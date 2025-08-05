@@ -1,19 +1,31 @@
 ﻿using System.Reflection;
+using AlexGenzor.EjercicioMasterD.Utils;
 using AlexGenzor.EjercicioMasterD.VehicleTypes;
 
 namespace AlexGenzor.EjercicioMasterD;
 
 public class CLIManager
 {
-    public static Dictionary<string, Vehicle> Vehicles = new Dictionary<string, Vehicle>();
+    private Dictionary<string, Vehicle> _vehicles = new Dictionary<string, Vehicle>();
     
-    public static void SelectionMenu()
+    private enum VehicleTypes { Car, Motorbike, Truck }
+
+    public CLIManager()
+    {
+        SelectionMenu();
+        
+    }
+    
+    #region MENUS
+    private void SelectionMenu()
     {
         bool doLeave = false;
 
         do
         {
-            Console.WriteLine("(1) Crear Vehículo.\n(2)Mostrar Vehículos.\n(3)Eliminar Vehículo.\n(4)Salir.\n");
+            Console.Clear();
+            
+            Console.WriteLine("(1) Crear Vehículo.\n(2) Mostrar Vehículos.\n(3) Eliminar Vehículo.\n(4) Salir.\n");
             Console.Write("Seleccione una acción: ");
 
             switch (Console.ReadLine().ToLower())
@@ -26,12 +38,14 @@ public class CLIManager
                 
                 case "2":
                 case "mostrar":
+                    ListVehiclesMenu();
                     // view list
                 
                     break;  
                 
                 case "3":
                 case "eliminar":
+                    DeleteVehicleMenu();
                     // delete vehicle
 
                     break;
@@ -44,7 +58,7 @@ public class CLIManager
                     break;
                 
                 default:
-                    Console.WriteLine("Opción seleccionada no es válida.\n");
+                    Console.WriteLine("Opción seleccionada no es válida. Pulse enter para continuar.");
                     
                     break;
                     
@@ -54,7 +68,7 @@ public class CLIManager
 
     }
 
-    public static void CreateVehicleMenu()
+    private void CreateVehicleMenu()
     {
         bool doLeave = false;
 
@@ -70,18 +84,23 @@ public class CLIManager
                 case "1":
                 case "coche":
                     // create car
+                    CreateVehicle(VehicleTypes.Car);
 
                     break;
 
                 case "2":
                 case "moto":
                     // create motorbike
+                    CreateVehicle(VehicleTypes.Motorbike);
+
 
                     break;
 
                 case "3":
                 case "camion":
                     // create truck
+                    CreateVehicle(VehicleTypes.Truck);
+
 
                     break;
 
@@ -93,7 +112,8 @@ public class CLIManager
                     break;
 
                 default:
-                    Console.WriteLine("Opción seleccionada no es válida.\n");
+                    Console.WriteLine("Opción seleccionada no es válida. Pulse enter para continuar.");
+                    Console.ReadLine();
 
                     break;
 
@@ -103,7 +123,7 @@ public class CLIManager
 
     }
 
-    public static void ListVehiclesMenu()
+    private void ListVehiclesMenu()
     {
         bool doLeave = false;
 
@@ -111,7 +131,7 @@ public class CLIManager
         {
             Console.Clear();
             
-            Console.WriteLine("(1) Coches.\n(2) Motos.\n(3) Camiones.\n(4) Todos.\n(5) Volver.");
+            Console.WriteLine("(1) Coches.\n(2) Motos.\n(3) Camiones.\n(4) Todos.\n(5) Volver.\n");
             Console.Write("Escoge una opción de visualización: ");
 
             switch (Console.ReadLine().ToLower())
@@ -119,18 +139,21 @@ public class CLIManager
                 case "1":
                 case "coches":
                     // list all cars
+                    ListVehiclesByClass(VehicleTypes.Car);
 
                     break;
                 
                 case "2":
                 case "motos":
                     // list all motorbikes
+                    ListVehiclesByClass(VehicleTypes.Motorbike);
 
                     break;
                 
                 case "3":
                 case "camiones":
                     // list all trucks
+                    ListVehiclesByClass(VehicleTypes.Truck);
                     
                     break;
                 
@@ -148,17 +171,18 @@ public class CLIManager
                     break;
                 
                 default:
-                    Console.WriteLine("Opción seleccionada no es válida.\n");
+                    Console.WriteLine("Opción seleccionada no es válida. Pulse enter para continuar.");
+                    Console.ReadLine();
                     
                     break;
                 
             }
-            
+
         } while (!doLeave);
-        
+
     }
 
-    public static void DeleteVehicleMenu()
+    private void DeleteVehicleMenu()
     {
         bool doLeave = false;
 
@@ -173,19 +197,19 @@ public class CLIManager
             {
                 case "1":
                 case "coche":
-                    ListVehiclesByClass("Car");
+                    ListVehiclesByClass(VehicleTypes.Car);
                     
                     break;
                 
                 case "2":
                 case "moto":
-                    ListVehiclesByClass("Motorbike");
+                    ListVehiclesByClass(VehicleTypes.Motorbike);
                     
                     break;
                 
                 case "3":
                 case "camion":
-                    ListVehiclesByClass("Truck");
+                    ListVehiclesByClass(VehicleTypes.Truck);
                     
                     break;
                 
@@ -197,7 +221,8 @@ public class CLIManager
                     break;
                 
                 default:
-                    Console.WriteLine("Opción seleccionada no es válida.\n");
+                    Console.WriteLine("Opción seleccionada no es válida.");
+                    Console.ReadLine();
                     
                     break;
                 
@@ -206,18 +231,67 @@ public class CLIManager
         } while (!doLeave);
         
     }
+    
+    #endregion
 
-    private static void ListVehiclesByClass(string className)
+    private void ListVehiclesByClass(VehicleTypes type)
     {
         Console.Clear();
+        bool hasVeiclesOfClass = false;
         
-        foreach (var vehicle in Vehicles)
+        foreach (var vehicle in _vehicles)
         {
-            if (vehicle.Value.GetType().Name.Equals(className))
+            if (vehicle.Value.GetType().Name.Equals(type.ToString()))
+            {
                 Console.WriteLine(vehicle.Value.ToString());
-            
+                hasVeiclesOfClass = true;
+
+            }
+
         }
         
+        if (!hasVeiclesOfClass)
+            Console.WriteLine("¡Oops! Aún no hay vehículos de esta categoría registrados. ");
+
+        Console.Write("Pulse enter para continuar.");
+        Console.ReadLine();
+
     }
+
+    private void CreateVehicle(VehicleTypes type)
+    {
+        Vehicle newVehicle = null;
+        Console.Clear();
+
+        do
+        {
+            switch (type)
+            {
+                case VehicleTypes.Car:
+                    newVehicle = new Car();
+
+                    break;
+
+                case VehicleTypes.Motorbike:
+                    newVehicle = new Motorbike();
+
+                    break;
+
+                case VehicleTypes.Truck:
+                    newVehicle = new Truck();
+
+                    break;
+
+            }
+            
+            Console.WriteLine();
+
+        } while (!MyUtils.DecipherAnswer("¿Esta contento con la información del vehículo?"));
+        
+        this._vehicles.Add(newVehicle.PlateNumber, newVehicle);
+
+    }
+    
+    
 
 }
