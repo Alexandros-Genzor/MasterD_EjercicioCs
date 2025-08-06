@@ -13,6 +13,7 @@ public class CLIManager
     public CLIManager()
     {
         SelectionMenu();
+        // DeleteVehicle();
         
     }
     
@@ -159,7 +160,20 @@ public class CLIManager
                 
                 case "4":
                 case "todos":
-                    // list all vehicles
+                    Console.Clear();
+                    
+                    if (_vehicles.Count == 0)
+                        Console.WriteLine("¡Oops! No hay vehículos en la lista. Añade un vehículo. ");
+
+                    else
+                        foreach (var vehicle in _vehicles)
+                        {
+                            Console.WriteLine(vehicle.Value.ToString());
+                        
+                        }
+                    
+                    Console.Write("\nPulsa enter para continuar.");
+                    Console.ReadLine();
                     
                     break;
                 
@@ -197,19 +211,22 @@ public class CLIManager
             {
                 case "1":
                 case "coche":
-                    ListVehiclesByClass(VehicleTypes.Car);
+                    if (ListVehiclesByClass(VehicleTypes.Car, true))
+                        DeleteVehicle();
                     
                     break;
                 
                 case "2":
                 case "moto":
-                    ListVehiclesByClass(VehicleTypes.Motorbike);
+                    if (ListVehiclesByClass(VehicleTypes.Motorbike, true))
+                        DeleteVehicle();
                     
                     break;
                 
                 case "3":
                 case "camion":
-                    ListVehiclesByClass(VehicleTypes.Truck);
+                    if (ListVehiclesByClass(VehicleTypes.Truck, true))
+                        DeleteVehicle();
                     
                     break;
                 
@@ -234,7 +251,7 @@ public class CLIManager
     
     #endregion
 
-    private void ListVehiclesByClass(VehicleTypes type)
+    private bool ListVehiclesByClass(VehicleTypes type, bool deleteMode = false)
     {
         Console.Clear();
         bool hasVeiclesOfClass = false;
@@ -249,12 +266,20 @@ public class CLIManager
             }
 
         }
-        
-        if (!hasVeiclesOfClass)
-            Console.WriteLine("¡Oops! Aún no hay vehículos de esta categoría registrados. ");
 
-        Console.Write("Pulse enter para continuar.");
+        if (!hasVeiclesOfClass)
+        {
+            Console.WriteLine("¡Oops! Aún no hay vehículos de esta categoría registrados. ");
+            
+            if (deleteMode)
+                Console.WriteLine("Proceso de eliminación de vehículos anulado. ");
+
+        }
+
+        Console.Write("\nPulse enter para continuar.");
         Console.ReadLine();
+        
+        return hasVeiclesOfClass;
 
     }
 
@@ -291,7 +316,41 @@ public class CLIManager
         this._vehicles.Add(newVehicle.PlateNumber, newVehicle);
 
     }
-    
-    
+
+    private void DeleteVehicle()
+    {
+        bool doLeave = false;
+
+        do
+        {
+            Console.Write("\nIntroduzca la matrícula del vehículo a eliminar, o escriba 'volver' para salir: ");
+            var plate = Console.ReadLine().ToUpper();
+
+            if (plate == "VOLVER")
+                doLeave = true;
+
+            if (_vehicles.ContainsKey(plate))
+            {
+                if (MyUtils.DecipherAnswer($"Vehículo encontrado. " +
+                                           $"¿Desea eliminar el vehículo con matrícula {plate}?"))
+                {
+                    _vehicles.Remove(plate);
+                    Console.WriteLine("Vehículo eliminado.");
+
+                    Console.ReadLine();
+                    
+                    doLeave = true;
+                    
+                } 
+                else
+                    Console.WriteLine("Vehículo no eliminado.");
+
+            }
+            else
+                Console.WriteLine($"Vehículo con matrícula {plate} no existe. Introduce una matrícula válida.");
+            
+        } while (!doLeave);
+
+    }
 
 }
