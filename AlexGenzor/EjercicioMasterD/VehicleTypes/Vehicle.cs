@@ -168,12 +168,12 @@ public abstract class Vehicle
         
         string plateNumber = "";
         
-        plateNumber+=rand.Next(0, 10000).ToString("0000") + " ";
+        plateNumber+=$"{rand.Next(0, 10000).ToString("0000")} ";
         
         for (int i = 0; i < 3; i++) 
         {
             // range in rand.Next() represents the range of values within the ascii table that 
-            // corresponds to all capitalised letters of the alphabet.
+            // corresponds to all capitalised letters of the alphabet, except the Ñ.
             plateNumber+=(char)rand.Next(65, 91);
 
         }

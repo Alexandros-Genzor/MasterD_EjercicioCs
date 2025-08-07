@@ -149,9 +149,6 @@ public class Car : Vehicle
                $"{WheelCount} ruedas, tracción {TractionType}. " +
                $"Vehículo especial: {(IsSpecialVehicle ? "si" : "no")}. " +
                $"Vehículo de transporte público: {(IsPublicTransportCar ? "si" : "no")}. ";
-        
-        // return $"Modelo: {Model} - {PlateNumber}, {WheelCount} ruedas, tracción {TractionType}" +
-        //        $"Tipo de motor: {EngineType}, {HorsePower} Caballos. Cambio de marchas: {GearShiftType}";
 
     }
     

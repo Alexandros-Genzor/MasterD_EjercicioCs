@@ -13,7 +13,6 @@ public class CLIManager
     public CLIManager()
     {
         SelectionMenu();
-        // DeleteVehicle();
         
     }
     
@@ -40,20 +39,17 @@ public class CLIManager
                 case "2":
                 case "mostrar":
                     ListVehiclesMenu();
-                    // view list
                 
                     break;  
                 
                 case "3":
                 case "eliminar":
                     DeleteVehicleMenu();
-                    // delete vehicle
 
                     break;
                 
                 case "4":
                 case "salir":
-                    // exit
                     doLeave = true;
 
                     break;
@@ -84,7 +80,6 @@ public class CLIManager
             {
                 case "1":
                 case "coche":
-                    // create car
                     CreateVehicle(VehicleTypes.Car);
 
                     break;
@@ -94,20 +89,16 @@ public class CLIManager
                     // create motorbike
                     CreateVehicle(VehicleTypes.Motorbike);
 
-
                     break;
 
                 case "3":
                 case "camion":
-                    // create truck
                     CreateVehicle(VehicleTypes.Truck);
-
 
                     break;
 
                 case "4":
                 case "volver":
-                    // return to previous menu
                     doLeave = true;
 
                     break;
@@ -139,21 +130,18 @@ public class CLIManager
             {
                 case "1":
                 case "coches":
-                    // list all cars
                     ListVehiclesByClass(VehicleTypes.Car);
 
                     break;
                 
                 case "2":
                 case "motos":
-                    // list all motorbikes
                     ListVehiclesByClass(VehicleTypes.Motorbike);
 
                     break;
                 
                 case "3":
                 case "camiones":
-                    // list all trucks
                     ListVehiclesByClass(VehicleTypes.Truck);
                     
                     break;
@@ -179,7 +167,6 @@ public class CLIManager
                 
                 case "5":
                 case "volver":
-                    // return to previous menu
                     doLeave = true;
 
                     break;
@@ -251,6 +238,7 @@ public class CLIManager
     
     #endregion
 
+    #region MENU_UTILS
     private bool ListVehiclesByClass(VehicleTypes type, bool deleteMode = false)
     {
         Console.Clear();
@@ -309,7 +297,7 @@ public class CLIManager
 
             }
             
-            Console.WriteLine();
+            Console.WriteLine(newVehicle.ToString() + "\n");
 
         } while (!MyUtils.DecipherAnswer("¿Esta contento con la información del vehículo?"));
         
@@ -352,5 +340,7 @@ public class CLIManager
         } while (!doLeave);
 
     }
+    
+    #endregion
 
 }
