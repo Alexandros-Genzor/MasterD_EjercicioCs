@@ -16,21 +16,7 @@ public class Car : Vehicle
     
     public Car()
     {
-        // base.Model = "Generic";
-        // base.HorsePower = 70;
-        // base.PlateNumber = AssignPlateNumber();
-        // base.WheelCount = 4;
-        // base.EngineType = EngineTypes.Petrol;
-        // base.GearShiftType = "Manual";
-        // base.TractionType = TractionTypes.RearWheels;
-        //
-        // this.DoorCount = 3;
-        // this.IsSpecialVehicle = false;
-        // this.AreWindowsTinted = false;
-        // this.IsPublicTransportCar = false;
-
         Console.WriteLine("Configurador de coches:\n");
-
         
         AssignModel();
         AssignHp();
@@ -144,9 +130,9 @@ public class Car : Vehicle
     public override string ToString()
     {
         return $"{PlateNumber} - Coche modelo: {Model}, {DoorCount} puertas con lunas traseras " +
-               $"{(AreWindowsTinted ? "tintadas" : "sin tintar")}. Tipo de motor: {EngineType} " +
+               $"{(AreWindowsTinted ? "tintadas" : "sin tintar")}. Tipo de motor: {EngineTypeDict[EngineType]} " +
                $"de {HorsePower} Caballos con cambio de marchas {GearShiftType}. " +
-               $"{WheelCount} ruedas, tracción {TractionType}. " +
+               $"{WheelCount} ruedas, tracción {TractionTypeDict[TractionType]}. " +
                $"Vehículo especial: {(IsSpecialVehicle ? "si" : "no")}. " +
                $"Vehículo de transporte público: {(IsPublicTransportCar ? "si" : "no")}. ";
 

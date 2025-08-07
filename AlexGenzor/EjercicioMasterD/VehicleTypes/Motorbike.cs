@@ -13,7 +13,6 @@ public class Motorbike : Vehicle
     public Motorbike()
     {
         Console.WriteLine("Configurador de motos:\n");
-
         
         AssignModel();
         AssignHp();
@@ -100,9 +99,10 @@ public class Motorbike : Vehicle
 
     public override string ToString()
     {
-        return $"{PlateNumber} - Motocicleta modelo: {Model}. Tipo de motor: {EngineType} " +
+        return $"{PlateNumber} - Motocicleta modelo: {Model}. Tipo de motor: {EngineTypeDict[EngineType]} " +
                $"de {HorsePower} Caballos con cambio de marchas {GearShiftType}. " +
-               $"{WheelCount} ruedas {(HasSidecar ? "con" : "sin")} sidecar, tracción {TractionType}. ";
+               $"{WheelCount} ruedas {(HasSidecar ? "con" : "sin")} sidecar, " +
+               $"tracción {TractionTypeDict[TractionType]}. ";
 
     }
 

@@ -7,8 +7,6 @@ public class Truck : Vehicle
 {
     public enum CabTypes { FlatFront, WideCab }
     
-    // public enum TrailerTypes { SemiTrailer, Trailer }
-    
     #region FIELDS
     private readonly Dictionary<int, string> _trailerVariations = new Dictionary<int, string>()
     {
@@ -24,8 +22,6 @@ public class Truck : Vehicle
     
     #region PROPERTIES
     public CabTypes CabType { get; set; }
-    // public Trailer Trailer { get; set; }
-    // public TrailerTypes[] Trailers { get; set; }
     public string Trailers { get; set; }
     public bool IsSpecialVehicle { get; set; }
     
@@ -180,9 +176,10 @@ public class Truck : Vehicle
 
     public override string ToString()
     {
-        return $"{PlateNumber} - Camión modelo: {Model} con cabina {CabType}. Tipo de motor: {EngineType} " +
-               $"de {HorsePower} Caballos con cambio de marchas {GearShiftType}. " +
-               $"{WheelCount} ruedas, tracción {TractionType} y {Trailers}. " +
+        return $"{PlateNumber} - Camión modelo: {Model} con cabina {CabType}. " +
+               $"Tipo de motor: {EngineTypeDict[EngineType]} de {HorsePower} Caballos " +
+               $"con cambio de marchas {GearShiftType}. {WheelCount} ruedas, " +
+               $"tracción {TractionTypeDict[TractionType]} y {Trailers}. " +
                $"Vehículo especial: {(IsSpecialVehicle ? "si" : "no")}. ";
 
     }
